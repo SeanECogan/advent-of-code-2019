@@ -1,5 +1,6 @@
-﻿using advent_of_code_2019.Solvers.Day1;
+﻿using advent_of_code_2019.Solvers.Day2;
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 
@@ -9,12 +10,21 @@ namespace advent_of_code_2019
     {
         public static void Main(string[] args)
         {
-            var moduleMasses = File.ReadAllLines("./Solvers/Day1/Day1Input.txt")
-                .Select(mm => Convert.ToInt32(mm));
+            var programInstructions = File.ReadAllText("./Solvers/Day2/Input.txt")
+                .Split(',')
+                .Select(pi => Convert.ToInt32(pi))
+                .ToList();
 
-            var totalFuelAmount = Puzzle2Solver.SolvePuzzle(moduleMasses);
+            var stopWatch = new Stopwatch();
+            stopWatch.Start();
 
-            Console.WriteLine($"The spacecraft needs {totalFuelAmount} units of fuel to launch.");
+            var combination = Puzzle2Solver.SolvePuzzle(programInstructions);
+
+            stopWatch.Stop();
+
+            Console.WriteLine("----- Day 2 Puzzle 2 -----");
+            Console.WriteLine($"The noun/verb combination to produce an output of 19690720 was {combination}.");
+            Console.WriteLine($"Answer was calculated in {(double)stopWatch.ElapsedTicks / (double)TimeSpan.TicksPerMillisecond}ms.");
 
             Console.ReadLine();
         }
